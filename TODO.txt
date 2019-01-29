@@ -1,3 +1,1 @@
-1. legyen egy nagy adatbázisunk szövegekről (lehet sql is felőlem)
-2. lehessen közösen játszani
-3. ne force closeoljon állandóan
+repjegy

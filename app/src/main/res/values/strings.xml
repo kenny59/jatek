@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">jatek</string>
+    <string name="title_activity_add_card_view">addCardView</string>
 </resources>

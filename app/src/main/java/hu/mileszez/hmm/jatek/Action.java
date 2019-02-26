@@ -10,14 +10,16 @@ public class Action {
     int id;
     static Calendar startDate = Calendar.getInstance();
     static Calendar endDate = Calendar.getInstance();
-    static String name = "";
+    static String name;
+    double timeNeeded;
     double progress;
+    static String desc;
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-    public Action(int idIn, int startD, int endD, String nam, String desc, String... ab) {
-        id = idIn;
-        parseDate(startD, startDate);
+    public Action(int endD, String nam, String des, double timeN, String... ab) {
         parseDate(endD, endDate);
         name = nam;
+        timeNeeded = timeN;
+        des = desc;
     }
 
     private boolean parseDate(int timeStampIn, Calendar out) {

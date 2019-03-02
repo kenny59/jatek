@@ -1,5 +1,7 @@
 package hu.mileszez.hmm.jatek;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +25,7 @@ public class addCardView extends AppCompatActivity {
         final CalendarView date = findViewById(R.id.date);
         final TextView desc = findViewById(R.id.desc);
         final Button button = findViewById(R.id.button);
+        final sql db = new sql(this);
         length.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -42,7 +45,9 @@ public class addCardView extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.setValues(String.valueOf(name), String.valueOf(desc));
                 Log.d("INFO", String.valueOf(length.getProgress()));
+                Log.d("INFO", String.valueOf(db.readValues(true)));
                 //Action lista = new Action( 20181212, "buzimaci", "ok", 12);
             }
         });

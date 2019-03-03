@@ -14,6 +14,10 @@ import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class addCardView extends AppCompatActivity {
     @Override
@@ -45,15 +49,35 @@ public class addCardView extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.setValues(String.valueOf(name), String.valueOf(desc));
-                Log.d("INFO", String.valueOf(length.getProgress()));
-                Log.d("INFO", String.valueOf(db.readValues(true)));
+                if (!checkValues(name, length, date, desc)) {
+                    return;
+                }
+                else {
+                    db.setValues(String.valueOf(name), String.valueOf(desc));
+                    Log.d("INFO", ObjToStr(length));
+                    Log.d("INFO", String.valueOf(db.readValues(true)));
+                }
                 //Action lista = new Action( 20181212, "buzimaci", "ok", 12);
             }
         });
     }
-    private String join(Object... ab) {
-        return ab.toString();
+    public String ObjToStr(TextView text) {
+        return String.valueOf(text.getText());
     }
-
+    public String ObjToStr(SeekBar length) {
+        return String.valueOf(length.getProgress());
+    }
+    public String ObjToStr(CalendarView cal) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+        String selectedDate = sdf.format(new Date(cal.getDate()));
+        return selectedDate;
+    }
+    private boolean checkValues(TextView name, SeekBar length, CalendarView date, TextView desc) {
+        if (ObjToStr(name).isEmpty() || ObjToStr(length) == "0" || ObjToStr(date).isEmpty() || ObjToStr(desc).isEmpty()) {
+            Log.d("INFO", "OK");
+            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
 }

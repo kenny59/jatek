@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 db.readValues(true);
+                Log.d("DB", db.getRow().toString());
+            }
+        });
+        Button button3 = findViewById(R.id.button3);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.dropTable();
             }
         });
     }

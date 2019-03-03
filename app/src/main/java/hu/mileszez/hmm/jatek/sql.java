@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -50,12 +49,28 @@ public class sql extends SQLiteOpenHelper {
         }
         return itemIds;
     }
+    public List getRow() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cur = db.rawQuery("SELECT * FROM rows", null);
+        List itemIds = new ArrayList<>();
+        while(cur.moveToNext()) {
+            String itemId = cur.getString(cur.getColumnIndexOrThrow("nev"));
+            Log.d("ITEM", itemId);
+        }
+        cur.close();
+        return itemIds;
+    }
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
+        db.execSQL(SQL_DELETE_ENTRIES);
+        onCreate(db);
+    }
+    public void dropTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }

@@ -58,9 +58,8 @@ public class addCardView extends AppCompatActivity {
                     return;
                 }
                 else {
-                    db.setValues(String.valueOf(name), String.valueOf(desc));
+                    db.setValues(ObjToStr(name), ObjToStr(desc));
                     Log.d("INFO", ObjToStr(length));
-                    Log.d("INFO", String.valueOf(db.readValues(true)));
                 }
                 //Action lista = new Action( 20181212, "buzimaci", "ok", 12);
             }
@@ -86,7 +85,6 @@ public class addCardView extends AppCompatActivity {
     }
     private boolean checkValues(TextView name, SeekBar length, CalendarView date, TextView desc) {
         if (ObjToStr(name).isEmpty() || ObjToStr(length) == "0" || ObjToStr(date).isEmpty() || ObjToStr(desc).isEmpty()) {
-            Log.d("INFO", "OK");
             Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
             return false;
         }

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FloatingActionButton fab = findViewById(R.id.floatingActionButton4);
+        final sql db = new sql(this);
         final Intent myIntent = new Intent(this, addCardView.class);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.readValues(true);
             }
         });
     }

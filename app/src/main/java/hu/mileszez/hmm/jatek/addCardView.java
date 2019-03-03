@@ -1,6 +1,7 @@
 package hu.mileszez.hmm.jatek;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +25,10 @@ public class addCardView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card_view);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         final TextView name = findViewById(R.id.name);
         final SeekBar length = findViewById(R.id.length);
         final CalendarView date = findViewById(R.id.date);
@@ -58,6 +63,13 @@ public class addCardView extends AppCompatActivity {
                     Log.d("INFO", String.valueOf(db.readValues(true)));
                 }
                 //Action lista = new Action( 20181212, "buzimaci", "ok", 12);
+            }
+        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent previous = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(previous);
             }
         });
     }
